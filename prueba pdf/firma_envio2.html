@@ -9,24 +9,6 @@
             color: black;
         }
 
-        .button {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 70%;
-            max-width: 350px;
-            height: 25px;
-            color: white;
-            background: #0176d3;
-            border: 1px solid #c9c9c9;
-            padding: 10px;
-            text-align: center;
-            border-radius: 5px;
-            font-weight: bold;
-            line-height: 25px;
-            font-weight: normal;
-        }
-
         img {
             display: block;
             margin-left: auto;
@@ -60,40 +42,35 @@
     <br />
     <h1>¡Se programó la cita!</h1>
     <div style="padding-left:2rem">
-        <p>Hola {!ServiceAppointment.Account},Su cita está programada.</p>
+        <p>Hola {!ServiceAppointment.Account}, Su cita está programada.</p>
     </div>
     <div style="background-color: #ECF0F1;padding-left:2rem;padding-top:1rem;padding-bottom:1rem">
         <p>Junto a un cordial saludo, agradecemos su consulta y la confianza depositada en nuestra clínica virtual.</p>
-        <p>Su hora de Ingreso/seguimiento {!ServiceAppointment.Clinica__c} ha sido agendada con éxito para el día
-            {!ServiceAppointment.SchedStartTime}.</p>
-        <p>La reunión se realizará por medio del link habilitado en el boton de mas abajo,Podrá acceder a la <b>videollamada</b>
+        <p>Su hora de Ingreso/seguimiento <b>{!ServiceAppointment.Clinica__c}</b> ha sido agendada con éxito para el
+            día
+            {!ServiceAppointment.SchedStartTime}.
+            La reunión se realizará por medio del link habilitado mas abajo, Podrá acceder a la
+            <b>videollamada</b>
             5 minutos antes de la hora agendada y el profesional esperará un máximo de 5 minutos posterior al
-            inicio de esta, antes de cancelar la hora de atención.</p>
+            inicio de esta, antes de cancelar la hora de atención.
+        </p>
 
         <b>Detalles de la cita</b>
         <p>Programada el<br><b><img class="icon"
-                    src="https://test.salesforce.com/img/icon/t4v35/utility/event_120.png"></span>{!DATETIMEVALUE(ServiceAppointment.SchedStartTime)}
-                - {!DATETIMEVALUE(ServiceAppointment.SchedEndTime)}{!User.TimeZoneSidKey} </b><br><br>
-            Tema de la cita<br><b>{!ServiceAppointment.Tipo_de_la_cita__c}</b><br><br>
-            Con<br><b>{!ServiceAppointment.Comments}</b><br><br>
+                    src="https://ca-backend-prd.s3.amazonaws.com/0016u00000PbDXfAAN/Correos+Mail/8.png"></span>{!DATETIMEVALUE(ServiceAppointment.SchedStartTime)}
+            </b><br><br>
+            Tema de la cita<br><b>{!ServiceAppointment.Interacci_n__c} - {!ServiceAppointment.Clinica__c}</b><br><br>
             Tipo<br><b>{!ServiceAppointment.AppointmentType}</b><br><br></p>
+
+        <div style="margin-top: 1rem;text-align: center">
+
+            <a href="{!ServiceAppointment.Link_Videollamada__c}"><b></b>Unirse a Videollamada</b></a>
+        </div>
     </div>
-    <div style="margin-top: 1rem;text-align: center"><a style="color:white;" class="button"
-            href="[GUEST_URL]?videocallinfo={!ServiceAppointment.ApptBookingInfoUrl}">Unirse a videollamada </a> </div>
+    <!-- href="[GUEST_URL]?videocallinfo={!ServiceAppointment.Link_Videollamada__c}">Unirse a videollamada</a> 
+    Con<br><a href="{!ServiceAppointment.Link_Videollamada__c}"><b></b>link de Conexión</b></a><br><br> -->
+
+
 </body>
 
 </html>
-
-Estimado/a {!ServiceAppointment.Account},
-
-Junto a un cordial saludo, agradecemos su consulta y la confianza depositada en nuestra clínica virtual.
-Su hora de Ingreso/seguimiento nutricional ha sido agendada con éxito para el día {!ServiceAppointment.SchedStartTime}.
-La reunión se realizará a por medio de este link: {!ServiceAppointment.Link_Videollamada__c}
-
-Podrá acceder a la video consulta 5 minutos antes de la hora agenda y el profesional esperará un máximo de 5 minutos
-posterior al inicio de esta, antes de cancelar la hora de atención.
-
-En caso de querer modificar o anular su cita, le solicitamos comunicarse por este medio.
-
-¡Que tenga buen día!
-Saludos.
