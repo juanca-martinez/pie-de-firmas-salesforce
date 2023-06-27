@@ -251,16 +251,28 @@
             {% endif %}
             {% if chat and item['AsisteClickLaunch'] %}
             <div class="col-xs-12 col-sm-4">
-              <a style="cursor: pointer" onclick="AsisteClickLaunch('{{item['AsisteClickLaunch']}}');">
+              <!-- <a style="cursor: pointer" onclick="AsisteClickLaunch('{{item['AsisteClickLaunch']}}');">
                 <img class="imagen_icono" src="/files/imagen_fijas/chat.png" style="" alt="">&nbsp;&nbsp;Chat Online
+
+
+
+              </a> 
+            
+            onclick="window.location = 'www.google.com'"-->
+              
+              <a style="cursor: pointer"  target="_new" href="www.google.com"></a>
+              <img class="imagen_icono" src="/files/imagen_fijas/chat.png" style="" alt="">&nbsp;&nbsp;Chat Online
               </a>
             </div>
             {% endif %}
             {% if item['video_chat'] %}
             <div class="col-xs-12 col-sm-12">
-              <a href="#" data-toggle="modal" data-target="#videoModal_{{item['id']}}">
+              <!-- <a href="#" data-toggle="modal" data-target="#videoModal_{{item['id']}}">
                 <img class="imagen_icono" src="/files/imagen_fijas/video_llamada.png" style=""
                   alt="">&nbsp;&nbsp;Agendar Video Llamada
+              </a> -->
+              <a href="https://www.google.com">
+                <img class="imagen_icono" src="/files/imagen_fijas/video_llamada.png" style="" alt="">&nbsp;&nbsp;Agendar Video Llamada
               </a>
             </div>
             {% endif %}

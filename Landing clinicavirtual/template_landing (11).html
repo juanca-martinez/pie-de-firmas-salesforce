@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+ <!--    <base href="/"> -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>{{titulo}}</title>
+    <meta name="description" content=" ">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
+    <link href="resources/css/fira-sans-book.css" rel="stylesheet">
+    <link href="resources/css/Comfortaa.css" rel="stylesheet">
+    <!-- <link href="http://fonts.cdnfonts.com/css/fira-sans-book" rel="stylesheet"> -->
+    <link href="resources/css/clinicavirtual.css" rel="stylesheet">
+    <link href="resources/css/swiper-bundle.min.css" rel="stylesheet">
+    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="homescreen/addtohomescreen.css">
+    <link rel="apple-touch-icon" sizes="57x57" href="homescreen/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="homescreen/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="homescreen/icons/apple-i con-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="homescreen/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="homescreen/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="homescreen/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="homescreen/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="homescreen/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="homescreen/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="homescreen/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="homescreen/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="homescreen/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="homescreen/icons/favicon-16x16.png">
+    <!-- <link rel="manifest" href="manifest.json"> -->
+    <meta name="msapplication-TileColor" content="#1d71b8">
+    <meta name="msapplication-TileImage" content="homescreen/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#1d71b8">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    {% if analytics %}
+      {{analytics|raw}}
+    {% endif %}
+  </head>
+  <body>
+    <div id="top"></div>
+
+<!--------------------------- CAEBECERA ---------------------------->
+    <header class="fija">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-6">
+            <div class="logo">
+              <!-- <img src="resources/img/logo.png" alt="Clinica Virtual"> 
+              <img  src="/resources/img/logo_header.png" >-->
+            </div>
+          </div>
+          <div class="col-xs-6">
+            <div class="logo-partner">
+              <img  src="{{logo}}" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+<!--------------------------- FIN CABECERA ---------------------------->
+
+<!--------------------------- SLIDER CARRUSEL --------------------------->
+    <div class="hero">
+      <div class="swiper mySwiper">
+        <input type="hidden" id="tiempo_slider" name="tiempo_slider" {% if tiempoSlider != null or tiempoSlider != 0 %} value="{{tiempoSlider}}000" {% else %} value="15000" {% endif %} >
+        <div class="swiper-wrapper" >
+          {% for item in slider %}
+            <div class="swiper-slide"> 
+              <!-- <a style="padding: 0;" href="https://www.google.com"></a> -->
+              <img class='imagen_web' src="{{item['header']}}"  {% if item['link'] != '' %} onclick="window.open('{{item['link']}}', '_blank')" {% endif %} >
+              <img class='imagen_mobile' src="{{item['headerMobile']}}" {% if item['link'] != '' %}  onclick="window.open('{{item['link']}}', '_blank')" {% endif %}>
+            </div>
+          {% endfor %}
+        </div>
+        {% if slider|length > 1 %}
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-pagination"></div>
+        {% endif %}
+      </div>
+    </div>
+<!--------------------------- FIN DE SLIDER CARRUSEL --------------------------->
+
+<!--------------------------- PROGRAMAS --------------------------->
+    <div class="grilla-complementarios">
+      <div class="barra_contenido"></div>
+      <div class="container">
+        <div class="introd">
+          <div class="pre"><span class="fuente_pretitulo" >¡Conoce tu Ecosistema de Salud Digital!</span></div>
+          <h3 ><span class="fuente_titulo" >Una nueva experiencia en Bienestar,</span></h3>
+          <p class="fuente_contenido_2">aprovecha nuestros servicios disponibles para ti y tu familia.</p>
+        </div>
+        {% if complementariosOk|length > 0 %}
+          <div class="row">
+            {% for item in complementariosOk %}
+              <div class="col-sm-6 col-md-4 col-lg-3">
+                <a href="#" data-toggle="modal" data-target="#myModal{{ item['id'] }}">
+                  <!-- El banner alto tiene el class "alto" -->
+                  <figure>
+                    <figcaption>
+                    <div class="tag">
+                      <span class="programa_titulo_previo" >{{ item['descripcion_previo']|nl2br }}</span>
+                      <span class="programa_titulo_cabecera">{{ item['descripcion']|raw }}</span>
+                    </div>
+                    <div class="txt"> 
+                      <img style="width: 64px; height: 64px;" src="{{ item['logo'] }}" alt="">
+                      <!-- <img style="width: 63px; height: 63px;" src="http://www.desarrollo_careassistance.com/files/imagen_prueba/prueba_logo.png" alt=""> -->
+                      <br>
+                      {% if item['descripcion_previo'] != '' and item['descripcion_previo'] != null %}
+                        <span class="programa_titulo_previo">{{ item['descripcion_previo']|nl2br }}</span>
+                      {% endif %}
+                      <br>
+                      <span class="programa_titulo_pie">{{ item['descripcion']|raw }}</span>
+                    </div>
+                    </figcaption>
+                    <img class='imagen_web' src="/files/imagen_fijas/sombra_programa_web.png" style="position: absolute;" alt="">
+                    <img class='imagen_mobile' src="/files/imagen_fijas/sombra_programa_mobile.png" style="position: absolute;" alt="">
+                    <!-- <img style="margin-top: 50px;" src="http://www.desarrollo_careassistance.com/files/imagen_prueba/prueba_programa_imagen_2.png" alt=""> -->
+                    <!-- <img style="margin-top: 70px;" src="http://www.desarrollo_careassistance.com/files/imagen_prueba/prueba_programa_imagen_3.png" alt=""> -->
+                    <img style="margin-top: 70px;" src="{{ item['imagen'] }}" alt="">
+                  </figure>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <p class="fuente_pretitulo">No se encontraron servicios</p>
+        {% endif %}
+      </div>
+    </div>
+<!--------------------------- FIN PROGRAMAS --------------------------->
+
+<!--------------------------- PLATAFORMAS DE ATENCION --------------------------->
+
+    <div id="nosotros"></div>
+    <div class="intro">
+      <div class="barra_contenido"></div>
+      <div class="container"> 
+        <div class="row">
+          <div class="col-sm-12">
+            <center>
+              <div class="txt">
+                <div class="pre"><span class="fuente_pretitulo" >Descarga App Care Assistance.</span></div>
+                <h2><span class="fuente_titulo" >Cuando te registres y valides</span></h2>
+
+                <!-- <p style="color:#0085cc;font-family: sans-serif; font-size: 50px;">PLATAFORMA DE ATENCIÓN</p> 
+                <p class="fuente_contenido_1">¡Como si fuera una consulta presencial, pero desde diversas plataformas digitales y desde cualquier lugar!</p>
+                <p class="fuente_contenido_2">Comunícate con nuestro equipo de profesionales de salud Y bienestar.</p> -->
+              </div>
+            </center>
+          </div>
+          <div class="col-sm-12">
+            <center>
+              <div class="imagen">
+                <!-- <img src="{{imagenPlataformaAtencion}}" alt=""> -->
+                <img src="/files/imagen_fijas/clinica-virtualcomunicate.png" alt="">
+              </div>
+            </center>
+          </div>
+        </div>
+        <div id="programas"></div>
+      </div>
+    </div>
+<!--------------------------- FIN PLATAFORMAS DE ATENCION --------------------------->
+
+<!--------------------------- INFORMACION DE INTERES --------------------------->
+    <div class="grilla-informativo">
+      <div class="barra_contenido"></div>
+      <div class="container">
+        <div class="introd">
+          <!-- <div class="pre">NUESTROS PROGRAMAS</div> -->
+          <span class="fuente_pretitulo" >INFORMACIÓN DE INTERÉS</span>
+          <!-- <p>Conoce los programas de salud y aprovecha nuestros servicios disponibles para ti y tu familia.</p> -->
+        </div>
+        {% if informacionOK|length > 0 %}
+          <div class="row">
+          {% for item in informacionOK %}
+            {% if item['status'] == 1 %}
+              <div class="col-sm-6 col-md-4 col-lg-3">
+                <!-- El banner alto tiene el class "alto" -->
+                <figure >
+                  <figcaption>   
+                    <div class="txt">
+                      <button  class="boton_informacion"  {% if item['contenido'] != '' %} onclick="window.open('{{item['contenido']}}', '_blank')" {% endif %} >
+                        <span class="fuente_contenido_4">{{ item['nombre_boton'] }}</span>
+                      </button>
+                    </div>
+                  </figcaption>
+                  <img src="{{ item['imagen'] }}" alt="">
+                </figure>           
+              </div>
+            {% endif %}
+          {% endfor %}
+          </div>
+        {% else %}
+          <p>No se encontraron información</p>
+        {% endif %}
+      </div>
+    </div>
+<!--------------------------- FIN INFORMACION DE INTERES --------------------------->
+
+<!--------------------------- MODAL CON INFORMACION DE CADA COMPLEMENTARIO --------------------------->
+    {% for item in complementariosModal %}
+      <div class="modal fade" id="myModal{{ item['id'] }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content modal-complementarios">
+            <div class="modal-header" >
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="false" class="disenox">&times;</span></button>
+              <!-- <h4 class="modal-title" id="myModalLabel">{{ item['tituloCustom'] }}</h4> -->
+            </div>
+            <!-- <div class="banner" style="bottom: 20px; position: relative;z-index:4;"> -->
+            <div class="banner" >
+              <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: absolute; float: right; "><span aria-hidden="true" style="color: #fff;">&times;</span></button> -->
+              <img class="imagen_cabecera" src="{{ item['imagenModal'] }}" alt="">
+              <!-- <img src="http://www.desarrollo_careassistance.com/files/imagen_prueba/prueba_imagen_banner.png" alt=""> -->
+            </div>
+            <div class="modal-body" >
+              <!-- <img src="{{ item['logo'] }}" alt=""> -->
+              <h3 class="fuente_contenido_3" hidden>{{ item['tituloCustom'] }}</h3>
+              <p >{{ item['textoCustom']|raw }}</p>
+              <div class="botones row">
+                {% if item['telefono'] %}
+                  <div class="col-xs-12 col-sm-4" >
+                    <a href="tel:{{item['telefono_n']}}">
+                      <img alt="logo" class="imagen_icono" src="/files/imagen_fijas/telefono.png" />&nbsp;&nbsp;{{item['telefono']}}
+                    </a>
+                  </div>
+                {% endif %}
+                {% if item['whatsapp'] %}
+                  <div class="col-xs-12 col-sm-4" >
+                    <a href="https://wa.me/{{item['whatsapp_n']}}?text={{tituloUrl}}">
+                      <img style="width: 25px; height: 25px;" src="/files/imagen_fijas/whatsapp.png" alt="">&nbsp;&nbsp;{{item['whatsapp']}}
+                    </a>
+                  </div>
+                {% endif %}
+                {% if chat and item['AsisteClickLaunch'] %}
+                  <div class="col-xs-12 col-sm-4" >
+                    <a style="cursor: pointer" onclick="AsisteClickLaunch('{{item['AsisteClickLaunch']}}');">
+                      <img class="imagen_icono" src="/files/imagen_fijas/Icono-Bot.png" style="" alt="">&nbsp;&nbsp;Agende Aquí
+                    </a>
+                  </div>
+                {% endif %}
+                {% if item['video_chat'] %}
+                  <div class="col-xs-12 col-sm-12">
+                    <a href="#" data-toggle="modal" data-target="#videoModal_{{item['id']}}">
+                      <img class="imagen_icono" src="/files/imagen_fijas/video_llamada.png" style="" alt="">&nbsp;&nbsp;Agendar Video Llamada
+                    </a>
+                  </div>
+                {% endif %}
+                {% if item['iniciar_video_llamada'] %}
+                  <div class="col-xs-12 col-sm-12">
+                    <a href="#" onclick="window.open('{{btnIniciarVideollamada}}' , 'ventana1' , 'width=1000,height=900,scrollbars=NO')">
+                      <img class="imagen_icono" src="/files/imagen_fijas/video_llamada.png" alt="">&nbsp;&nbsp;Iniciar Video Llamada
+                    </a>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+<!--------------------------- FIN MODAL CON INFORMACION DE CADA COMPLEMENTARIO --------------------------->
+  
+<!--------------------------- BOTON EXPEROENCIA --------------------------->
+    <div class="grilla-complementarios">
+      <div class="container">
+        <div class="introd">
+          <button class="boton_experiencia"  data-toggle="modal" data-target="#evaluarModal"> ¿Cómo estuvo tu experiencia? </button>
+        </div>
+      </div>
+    </div>
+<!--------------------------- FIN DE BOTON EXPERIENCIA --------------------------->
+
+<!--------------------------- PIE DE PAGINA --------------------------->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="nav-main col-md-10  col-sm-9 col-xs-12" style="margin-top: 35px;">
+            <a href="https://careassistance.com/" class="fantasma" target="_BLANK"> Visita nuestra web </a>
+            <a href="#" id="modal_contacto" data-toggle="modal" data-target="#contactoModal" class="fantasma" > Contáctanos </a>
+            <a href="#" data-toggle="modal" data-target="#legalModal2" class="fantasma"> Términos y Condiciones </a>
+          </div>
+          <div class="logo_pie col-md-2 col-sm-3 col-xs-12">
+            <img src="resources/img/logo-footer.png" alt="Care Assistance" >
+          </div>
+          <br>
+          <div class="container firma_pie" >
+            © {{year}} Grupo Care Assistance. Todos los derechos reservados.
+        </div>
+      </div>
+    </footer>
+<!--------------------------- FIN PIE DE PAGINA --------------------------->
+
+<!--------------------------- MODAL AGENDA CALENDARIO --------------------------->
+    {% for item in programas %} 
+      <div class="modal fade" class="modal fade" id="videoModal_{{ item['id'] }}" tabindex="-1" role="dialog" aria-labelledby="VideoLlamada">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content modal-complementarios">
+            <div class="modal-header" >
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="false" style="color: #0085cc;" class="disenox">&times;</span></button>  
+            </div>
+            <div class="banner" style="padding: 30px;"> 
+              <center> 
+                <img class="imagen_cabecera" src="resources/img/video.png" alt="">
+              </center>
+            </div>
+            <h3 style="text-align: center;color: #1477aa;font-family: 'Fira Sans ExtraBold', sans-serif;font-size: 1.85m;">Agenda tu video llamada<br>
+            con un especialista</h3>
+            <form id="frmVideollamada_{{ item['id'] }}" name="frmVideollamada_{{ item['id'] }}">
+              <input type="hidden" id="submitVideollamada_{{ item['id'] }}" name="submitVideollamada_{{ item['id'] }}" value="1">
+              <div class="modal-body">
+                <div class="form">
+                  <input type="text" placeholder="Nombre y Apellido" id="frmNombre_{{ item['id'] }}" name="frmNombre_{{ item['id'] }}">
+                  <input type="email" placeholder="Email" id="frmEmail_{{ item['id'] }}" name="frmEmail_{{ item['id'] }}">
+                  <input type="text" placeholder="Empresa" id="frmEmpresa_{{ item['id'] }}" name="frmEmpresa_{{ item['id'] }}">
+                  <input type="text" placeholder="País" id="frmPais_{{ item['id'] }}" name="frmPais_{{ item['id'] }}">
+                </div>
+                <h4>Selecciona fecha y horario para la video llamada</h4>
+                <p>Fechas disponibles</p>
+                <div class="calendario-wrapper">
+                  <div class='calendarBox'>
+                    <div class='dnaCalendar' data-select-target='#videoModal_{{ item['id'] }} .form-control'>
+                      {% for item2 in item['fechas'] %}
+                        <event day='{{ item2['dia'] }}' month='{{ item2['mes'] }}' year='{{ item2['anio'] }}' data-horarios='{{ item2['fechas'] }}' />
+                      {% endfor %} 
+                    </div>
+                  </div>
+                </div>
+                <h5>Horarios disponibles</h5>
+                <select class="form-control" id="frmFecha_{{ item['id'] }}" name="frmFecha_{{ item['id'] }}">
+                  <option>seleccionar una fecha</option>
+                </select>
+              </div>
+              <div class="modal-footer">
+                <button id="btnVideollamada_{{ item['id'] }}" type="button" class="boton-flecha">Confirmar</button> <button type="button" class="boton-cerrar"data-dismiss="modal">Cerrar</button>
+                <div id="frmVideollamadaError_{{ item['id'] }}"></div>
+                <div id="frmVideollamadaGracias_{{ item['id'] }}" style="display: none">Su mensaje ha sido enviado.</div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+<!--------------------------- FIN MODAL AGENDA CALENDARIO --------------------------->
+
+<!--------------------------- MODAL LEGALES --------------------------->
+    <div class="modal fade" id="legalModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body_termino"  style="padding: 30px 80px 20px 80px">
+            <h3>ATENCIÓN</h3>
+            <br>
+            <p class="fuente_contenido_2">{{tyc|nl2br}}</p>
+          </div>
+          <div class="modal-footer" style="padding: 0 80px 30px 80px;">
+            <button style="font-size: 18px;" type="button" class="boton_contacto" data-dismiss="modal">Acepto</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<!--------------------------- fin MODAL LEGALES --------------------------->
+
+<!--------------------------- MODAL TERMINOS Y CONFDICIONES FOOTER --------------------------->
+    <div class="modal fade" id="legalModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header" >
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="false" class="disenox" style="color: #0085cc;">&times;</span></button>
+          </div>
+          <div class="modal-body_termino">
+            <h3 >TÉRMINOS <br>Y CONDICIONES</h3>
+            <p class="fuente_contenido_5">{{legales|nl2br}}</p>
+          </div>
+          <div class="modal-footer-imagen">
+            <img src="/files/imagen_fijas/Terminos_Modal.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+<!--------------------------- FIN MODAL TERMINOS Y CONFDICIONES FOOTER --------------------------->
+
+<!--------------------------- MODAL DE EVALUACION DE EXPERIENCIA --------------------------->
+    <div class="modal fade" id="evaluarModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="false" class="disenox" style="color: #0085cc;">&times;</span></button>  
+          </div>
+          <div class="banner">
+            <img style="width: 70% ; height: auto;" class="imagen_cabecera" src="/files/imagen_fijas/Evaluacion_Modal.png" alt="">
+          </div>
+          <form method="post" id="form_experiencia">
+            <div class="modal-body_experiencia">
+              <h3 >EVALUA LA EXPERIENCIA <br> Y ATENCIÓN RECIBIDA</h3>
+              <p class="fuente_experiencia_1">¿Como estuvo tu experiencia en el sitio y que tal fácil fue acceder a nuestro programas?</p>
+              <p class="fuente_experiencia_2">Valoramos mucho tus comentarios.</p>
+              <p class="fuente_experiencia_error" id="mensaje_error_experiencia" hidden>Seleccione un Valor.</p>
+            </div>
+            <div class="modal-body_experiencia_botones">
+              <input class="checkbox-tools" type="radio" name="experiencias" id="experiencia-1" value="1">
+              <label class="for-checkbox-tools boton_1" for="experiencia-1">1</label>
+              <input class="checkbox-tools" type="radio" name="experiencias" id="experiencia-2" value="2">
+              <label class="for-checkbox-tools boton_2" for="experiencia-2">2</label>
+              <input class="checkbox-tools" type="radio" name="experiencias" id="experiencia-3" value="3">
+              <label class="for-checkbox-tools boton_3" for="experiencia-3">3</label>
+              <input class="checkbox-tools" type="radio" name="experiencias" id="experiencia-4" value="4">
+              <label class="for-checkbox-tools boton_4" for="experiencia-4">4</label>
+              <input class="checkbox-tools" type="radio" name="experiencias" id="experiencia-5" value="5">
+              <label class="for-checkbox-tools boton_5" for="experiencia-5">5</label>
+              <input class="checkbox-tools" type="radio" name="experiencias" id="experiencia-6" value="6">
+              <label class="for-checkbox-tools boton_6" for="experiencia-6">6</label>
+              <input class="checkbox-tools" type="radio" name="experiencias" id="experiencia-7" value="7">
+              <label class="for-checkbox-tools boton_7" for="experiencia-7">7</label>
+              <input class="checkbox-tools" type="radio" name="experiencias" id="experiencia-8" value="8">
+              <label class="for-checkbox-tools boton_8" for="experiencia-8">8</label>
+              <input class="checkbox-tools" type="radio" name="experiencias" id="experiencia-9" value="9">
+              <label class="for-checkbox-tools boton_9" for="experiencia-9">9</label>
+              <input class="checkbox-tools" type="radio" name="experiencias" id="experiencia-10" value="10">
+              <label class="for-checkbox-tools boton_10" for="experiencia-10">10</label>
+            </div>
+            <div class="modal-footer_experiencia">
+              <button class="boton-footer_experiencia" type="submit" name="submit" style="">Enviar</button>    
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+<!--------------------------- FIN MODAL DE EVALUACION DE EXPERIENCIA --------------------------->
+
+<!--------------------------- MODAL CONTACTO --------------------------->
+     <div class="modal fade" id="contactoModal" tabindex="-1" role="dialog" aria-labelledby="Contacto">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content modal-complementarios">
+          <div class="modal-header" >
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="false" class="disenox">&times;</span></button>    
+          </div>           
+          <div class="banner" >
+            <img style="z-index: 2;" class="imagen_cabecera" src="/files/imagen_fijas/Contacto_Modal.png" alt="">
+            <h3 class="fuente_titulo_contacto">CONTÁCTANOS</h3>
+            <form id="frmContacto" name="frmContacto">
+              <input type="hidden" id="submitContacto" name="submitContacto" value="1">
+              <div class="modal-body_contacto">
+                <div class=" div_resposive_contacto">
+                  <div><h3>¿Tienes preguntas,<strong> sugerencias o comentarios?</strong></h3></div>
+                </div>
+                <div class="div_resposive_contacto_2 row" >
+                  <div class="div_resposive_contacto_3">
+                    DÉJANOS TUS DATOS
+                  </div>
+                  <div class="form-row col-sm-12">
+                    <div id="frmContactoError" class="contacto_respuesta" style="color: red"></div>
+                    <div id="frmContactoGracias" class="contacto_respuesta" style=" color: green; ">Su mensaje ha sido enviado. <i class="fa fa-check"></i></div>
+                  </div>
+                  
+                  <div class="form-row col-sm-6">
+                    <label for="contactoNombre" class="fuente_contenido_6">Nombre y Apellido:</label>
+                    <input type="text" class="form-control" style="" id="contactoNombre" name="contactoNombre" required>
+                  </div>
+                  <div class="form-row col-sm-6">
+                    <label for="contactoEmail" class="fuente_contenido_6">Email:</label>
+                    <input type="email" class="form-control" id="contactoEmail" name="contactoEmail" required>
+                  </div>
+                  <div class="form-row col-sm-4">
+                    <label for="contactoTelefono" class="fuente_contenido_6">Teléfono:</label>
+                    <input type="text" class="form-control" id="contactoTelefono" name="contactoTelefono" >
+                  </div>
+                  <div class="form-row col-sm-4">
+                    <label for="contactoPais" class="fuente_contenido_6">Pais:</label>
+                    <input type="text" class="form-control" id="contactoPais" name="contactoPais" required>
+                  </div>
+                  <div class="form-row col-sm-4">
+                    <label for="contactoAsunto" class="fuente_contenido_6">Asunto:</label>
+                    <select class="form-control" id="contactoAsunto" name="contactoAsunto" required>
+                      <option value="1">Sugerencias</option>
+                      <option value="2">Felicitaciones</option>
+                      <option value="3">Consultas</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-sm-12">
+                    <label for="contactoMensaje" class="fuente_contenido_6">Mensaje (Opcional):</label>
+                    <textarea class="form-control" id="contactoMensaje" name="contactoMensaje" rows="3" min="25" required></textarea>
+                  </div>
+                  <div class="form-group col-sm-12">
+                    <button class="boton_contacto" id="btnContacto" type="button">Enviar</button>
+                    <button class="boton_contacto_carga" id="btnContactocargando" type="button" style="display: none;">Enviando <img class="boton_carga" style="height: auto;" src="/files/imagen_fijas/carga-animacion.gif" alt=""></button>
+                  </div>
+                  
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+<!--------------------------- FIN MODAL CONTACTO --------------------------->
+<!-- JS -->
+  <script src="resources/js/jquery-1.12.4.min.js"></script>
+  <script src="resources/js/bootstrap.min.js"></script>
+  <script src="resources/js/scrollreveal.min.js"></script>
+  <script src="resources/js/swiper-bundle.min.js"></script>
+  <script src="resources/js/jQuery.succinct.min.js"></script>
+  <script src="resources/js/jQuery.succinct.js"></script>
+ <!-- Swiper JS -->
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('input:radio[name=experiencias]').click(function() {
+        $('#mensaje_error_experiencia').hide();
+      });
+      $("#form_experiencia").submit(function(e){
+        e.preventDefault();
+        if($("input:radio[name=experiencias]").is(':checked'))
+        {
+          var experiencia_check = $('input:radio[name=experiencias]:checked').val();
+          var formData = new FormData(document.getElementById("form_experiencia"));
+          formData.append("experiencia_check",  experiencia_check);
+          formData.append("id_empresa", {{id}});
+          formData.append("id_funcion", 1); //evalua tu experiencia
+        // Enviamos los datos al archivo PHP que procesará el envio de los datos a un determinado correo 
+          $.ajax(
+          {
+            url: "/funcion.php",
+            method: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) 
+            {
+              $('#evaluarModal').html(data);
+            },
+            error: function(){
+              alert('error al evaluar');
+              console.log("Error!");
+            }                                           
+          });
+        }
+        else
+        {
+          $('#mensaje_error_experiencia').show(); 
+          return false;
+        }
+      });
+    });
+  </script>
+    
+<!-- Initialize Swiper -->
+  {% if slider|length > 1 %}
+    <script>
+      var tiempo_slider = $('#tiempo_slider').val();
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 0,
+        loop: true,
+        autoplay: {
+          delay: tiempo_slider,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    </script>
+  {% endif %}
+
+
+  <script>
+    $(function(){
+      var LEGAL=window.localStorage.getItem("SIEMPRE_LEGAL");
+      if(LEGAL==undefined || LEGAL==null || LEGAL==''){
+        window.localStorage.setItem("SIEMPRE_LEGAL","true");
+        $('#legalModal').modal('show');
+      }
+    });
+  </script>
+  <script src="resources/dnaCalendar/dnaCalendar.js"></script>
+  {% for item in programas %}
+    <script>
+      $(function () {
+  //CUANDO SE SELECCIONA UNA FECHA EN EL CALENDARIO
+  // res={d:dia,m:mes(0-11),y:year,data:"10:00 11:00"}
+        function calAction_{{ item['id'] }}(res, div) {
+          var qry = res.d + "/" + (Number(res.m) + 1) + "/" + res.y;
+          console.log(res);
+          var selectEl = $(div.attr('data-select-target'));
+          div.find(".dcSelectedLabel").html('fecha seleccionada: ' + qry);
+          if (selectEl) {
+            selectEl.html('');
+            var horarios = res.data.split(' ');
+            for (var i = 0; i < horarios.length; i++) {
+              selectEl.append("<option value='" + qry + " " + horarios[i] + "'>" + horarios[i] + "</option>");
+            }
+          }
+        }
+        $('#videoModal_{{ item['id'] }}').on('shown.bs.modal', function (e) {
+          console.log("open video modal");
+          if ($("#videoModal_{{ item['id'] }} .dnaCalendar .dcdiv").length == 0) {
+            $("#videoModal_{{ item['id'] }} .dnaCalendar").each(function () { window.dnaCalendar($(this), calAction_{{ item['id'] }}) });
+          } else {
+            window.alignCalendar($("#videoModal_{{ item['id'] }} .dnaCalendar"));
+          }
+        });
+      });
+      $( "#btnVideollamada_{{ item['id'] }}" ).click(function() {
+  // console.log( $( "#btnContacto" ).serialize() );
+        $( "#frmVideollamadaError_{{ item['id'] }}" ).html('');
+        $( "#frmVideollamadaGracias_{{ item['id'] }}" ).hide();
+        $.post( "{{link}}", $( "#frmVideollamada_{{ item['id'] }}" ).serialize()).done(function( data ) {
+          if (data == 'ok') {
+            $( "#frmVideollamada_{{ item['id'] }}" ).trigger("reset");
+            $( "#frmVideollamadaGracias_{{ item['id'] }}" ).show();
+          } else {
+            $( "#frmVideollamadaError_{{ item['id'] }}" ).html(data);
+          }
+        });
+      });
+    </script>
+  {% endfor %}
+  <script src="resources/js/main.js"></script>
+  <script src="resources/js/slider.js?v=2"></script>
+  <script>
+  AOS.init();
+
+
+  $( document ).ready(function() {
+    $( ".suscripcionModalLink" ).click(function() {
+      $( ".subsAll" ).prop('checked', false);
+      $( ".subsAll" ).closest("label").removeClass("active");
+      $( "." + $( this ).data( "id" ) ).prop('checked', true);
+      $( "." + $( this ).data( "id" ) ).closest("label").addClass("active");
+    });
+
+    $( "#btnSuscripcion" ).click(function() {
+    // console.log( $( "#frmSuscripcion" ).serialize() );
+
+      $( "#frmSuscripcionError" ).html('');
+      $( "#frmSuscripcionGracias" ).hide();
+
+      $.post( "{{link}}", $( "#frmSuscripcion" ).serialize())
+      .done(function( data ) {
+        if (data == 'ok') {
+          $( ".subsAll" ).prop('checked', false);
+          $( ".subsAll" ).closest("label").removeClass("active");          
+          $( "#frmSuscripcion" ).trigger("reset");
+          $( "#frmSuscripcionGracias" ).show();
+        } else {
+          $( "#frmSuscripcionError" ).html(data);
+        }
+      });
+    });
+
+    $( "#btnContacto" ).click(function() {
+    // console.log( $( "#btnContacto" ).serialize() );
+      $( "#frmContactoError" ).html('');
+      $( "#frmContactoGracias" ).hide();
+      $( "#btnContacto" ).hide();
+      $( "#btnContactocargando" ).show();
+
+      $.post( "{{link}}", $( "#frmContacto" ).serialize())
+      .done(function( data ) {
+        if (data == 'ok') {
+          $( "#frmContacto" ).trigger("reset");
+          $( "#frmContactoGracias" ).show();
+          $( "#btnContacto" ).show();
+          $( "#btnContactocargando" ).hide();
+        } else {
+          $( "#frmContactoError" ).html(data);
+          $( "#btnContacto" ).show();
+          $( "#btnContactocargando" ).hide();
+        }
+      });
+    });
+
+
+    $( "#modal_contacto" ).click(function() {
+    // console.log( $( "#btnContacto" ).serialize() );
+
+      $( "#frmContactoError" ).html('');
+      $( "#frmContactoGracias" ).hide();
+
+    });
+  });
+
+
+</script>
+  <script src="homescreen/addtohomescreen.min.js"></script>
+  <script>
+    if((("standalone" in window.navigator)  &&  !window.navigator.standalone) ||  (!window.matchMedia('(display-mode: standalone)').matches)){
+      addToHomescreen()
+    }
+  </script>
+  {% if chat %}
+    {{chat|raw}}
+  {% endif %}
+
+  </body>
+
+
+</html>
